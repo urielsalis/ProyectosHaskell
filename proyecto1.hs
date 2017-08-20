@@ -17,7 +17,9 @@ promedio :: [Int] -> Int -- Funcion redondea siempre abajo
 promedio [] = 0
 promedio (x:xs) = (x + sum xs) `div` (1 + length xs)
 
-promedio’ :: [Int]
+promedio' :: [Int] -> Int -- Funcion redondea al mas cercano
+promedio' [] = 0
+promedio' xs = div (sum xs) (length xs)
 -- Ejercicio 2
 
 paratodo :: [Bool] -> Bool
@@ -38,14 +40,14 @@ productoria (x:xs) = x * productoria xs
 pertenece :: Int -> [Int] -> Bool
 pertenece n [] = False
 pertenece n (x:xs) | x==n = True
-		   | x/=n = pertenece n xs
+		   | otherwise = pertenece n xs
 
 -- Ejercicio 4
 
 encuentra :: Int -> [(Int,String)] -> String
 encuentra n [] = ""
 encuentra n ((a,b):xs) | a==n = b
-		       | a/=n = encuentra n xs
+		       | otherwise = encuentra n xs
 
 -- Ejercicio 5
 
