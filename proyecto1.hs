@@ -14,7 +14,7 @@ factorial 0 = 1
 factorial x = x * factorial (x-1)
 
 promedio :: [Int] -> Int -- Funcion redondea siempre abajo
-promedio [] = 1
+promedio [] = 0
 promedio (x:xs) = (x + sum xs) `div` (1 + length xs)
 
 promedio’ :: [Int]
