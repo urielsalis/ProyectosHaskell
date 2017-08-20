@@ -80,7 +80,7 @@ sumaCuadrados :: Int -> Int
 sumaCuadrados n = sumatoria' [0..n] (\x -> x*x) --  (^2) da una warning
 
 multiplicaPares :: [Int] -> Int
-multiplicaPares xs = productoria' (filter (\x -> (mod x 2)==0) xs) id --COMO PODEMOS HACER ESTO SIN FILTER!!!!!!!!!111!!1one!!
+multiplicaPares xs = productoria' ([ x | x <- xs, (mod x 2)==0]) id --Se puede usar una funcion auxiliar definida por recursion que haga que el caso base sea 0?
 
 -- Ejercicio 8
 -- map xs f: Es una funcion que devuelve una lista formada por todos los elementos de la lista xs al aplicar p a cada uno
