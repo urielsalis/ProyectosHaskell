@@ -40,14 +40,14 @@ productoria (x:xs) = x * productoria xs
 pertenece :: Int -> [Int] -> Bool
 pertenece n [] = False
 pertenece n (x:xs) | x==n = True
-		   | otherwise = pertenece n xs
+                   | otherwise = pertenece n xs
 
 -- Ejercicio 4
 
 encuentra :: Int -> [(Int,String)] -> String
 encuentra n [] = ""
 encuentra n ((a,b):xs) | a==n = b
-		       | otherwise = encuentra n xs
+                       | otherwise = encuentra n xs
 
 -- Ejercicio 5
 
