@@ -17,9 +17,6 @@ promedio :: [Int] -> Int -- Funcion redondea siempre abajo
 promedio [] = 0
 promedio (x:xs) = (x + sum xs) `div` (1 + length xs)
 
-promedio' :: [Int] -> Int -- Funcion redondea al mas cercano
-promedio' [] = 0
-promedio' xs = div (sum xs) (length xs)
 -- Ejercicio 2
 
 paratodo :: [Bool] -> Bool
@@ -74,13 +71,24 @@ paratodo'' xs = paratodo' xs id
 
 -- Ejercicio 7
 
+esPar :: Int -> Bool -- Se puede usar esto?
+esPar x = mod x 2 == 0
+cuadrado :: Int -> Int
+cuadrado i = i^2
 
+todosPares :: [Int] -> Bool
+todosPares xs = paratodo' xs (\x -> (mod x 2 == 0)) --Es legal usar funciones anonimas o tenemos que usar esPar?
 
+esMultiplo :: Int -> Int -> Bool -- Se puede usar esto?
+esMultiplo n x = mod x n == 0
+hayMultiplo :: Int -> [Int] -> Bool --Porque no anda estooooooooooooooooo
+hayMultiplo n xs = existe' xs (esMultiplo n)
 
+sumaCuadrados :: Int -> Int
+sumaCuadrados n = sumatoria' [0..n] (^2)
 
+multiplicaPares :: [Int] -> Int
+multiplicaPares xs = productoria' (filter esPar xs) id --Se puede usar filter?
 
-
-
-
-
-
+-- Ejercicio 8
+-- map: 
