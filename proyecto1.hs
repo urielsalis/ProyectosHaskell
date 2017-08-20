@@ -35,33 +35,33 @@ productoria (x:xs) = x * productoria xs
 -- Ejercicio 3
 
 pertenece :: Int -> [Int] -> Bool
-pertenece n [] = False
+pertenece _ [] = False
 pertenece n (x:xs) | x==n = True
                    | otherwise = pertenece n xs
 
 -- Ejercicio 4
 
 encuentra :: Int -> [(Int,String)] -> String
-encuentra n [] = ""
+encuentra _ [] = ""
 encuentra n ((a,b):xs) | a==n = b
                        | otherwise = encuentra n xs
 
 -- Ejercicio 5
 
 paratodo' :: [a] -> (a -> Bool) -> Bool
-paratodo' [] t = True
+paratodo' [] _ = True
 paratodo' (x:xs) t = (t x) && paratodo' xs t
 
 existe' :: [a] -> (a -> Bool) -> Bool
-existe' [] t = False
+existe' [] _ = False
 existe' (x:xs) t = (t x) && existe' xs t
 
 sumatoria' :: [a] -> (a -> Int) -> Int
-sumatoria' [] t = 0
+sumatoria' [] _ = 0
 sumatoria' (x:xs) t = (t x) + sumatoria' xs t
 
 productoria' :: [a] -> (a -> Int) -> Int
-productoria' [] t = 1
+productoria' [] _ = 1
 productoria' (x:xs) t = (t x) * productoria' xs t
 
 -- Ejercicio 6
