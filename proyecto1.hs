@@ -70,25 +70,32 @@ paratodo'' :: [Bool] -> Bool
 paratodo'' xs = paratodo' xs id
 
 -- Ejercicio 7
+
 todosPares :: [Int] -> Bool
-todosPares xs = paratodo' xs (\x -> (mod x 2 == 0)) --Es legal usar funciones anonimas o tenemos que usar esPar?
+todosPares xs = paratodo' xs (\x -> (mod x 2 == 0))
 
 hayMultiplo :: Int -> [Int] -> Bool
 hayMultiplo n xs = existe' xs (\x -> (mod x n)==0)
 
 sumaCuadrados :: Int -> Int
-sumaCuadrados n = sumatoria' [0..n] (\x -> x*x) --  (^2) da una warning
+sumaCuadrados n = sumatoria' [0..n] (\x -> x*x) 
+
+soloPares :: [Int] -> [Int]
+soloPares [] = []
+soloPares (x:xs) | (mod x 2)==0 = x:soloPares xs
+                 | otherwise = soloPares xs
 
 multiplicaPares :: [Int] -> Int
-multiplicaPares xs = productoria' ([ x | x <- xs, (mod x 2)==0]) id --Se puede usar una funcion auxiliar definida por recursion que haga que el caso base sea 0?
+multiplicaPares xs = productoria' (soloPares xs) id 
 
 -- Ejercicio 8
--- map xs f: Es una funcion que devuelve una lista formada por todos los elementos de la lista xs al aplicar p a cada uno
+-- map xs f: Es una funcion que devuelve una lista formada por todos los elementos de la lista xs al aplicar f a cada uno
 -- filter xs f: Es una funcion que devuelve una lista formada por todos los elementos de la lista xs que cumplen f
 -- map succ [1, -4, 6, 2, -8] equivale a aplicar succ a cada elemento de la lista, por lo que el resultado es [2, -3, 7, 3, -7]
 -- filter esPositivo [1, -4, 6, 2, -8] equivale a devolver una lista formado por los items de la lista que cumplen esPositivo, por lo tanto el resultado es [1, 6, 2]
 
 -- Ejercicio 9
+
 duplicar :: [Int] -> [Int] --9a
 duplicar [] = []
 duplicar (x:xs) = (x*2):duplicar xs
@@ -110,6 +117,7 @@ multiplicaPares' :: [Int] -> Int --10c
 multiplicaPares' xs = productoria' (filter (\x -> (mod x 2)==0) xs) id
 
 -- Ejercicio 11
+
 sumarALista :: Num a => a -> [a] -> [a]
 sumarALista _ [] = []
 sumarALista n (x:xs) = (n+x):sumarALista n xs
@@ -128,7 +136,7 @@ encabezar' :: a -> [[a]] ->[[a]]
 encabezar' n xss = map (\xs -> n:xs) xss 
 
 
-mayoresA :: Ord a => a -> [a] -> [a] --Esta mal en el cuadernillo, tiene que ser Ord a => en vez de Ord a ->
+mayoresA :: Ord a => a -> [a] -> [a] 
 mayoresA _ [] = []
 mayoresA n (x:xs) | x>n = x:(mayoresA n xs)
                   | otherwise = mayoresA n xs
@@ -137,15 +145,14 @@ mayoresA' :: Ord a => a -> [a] -> [a]
 mayoresA' n xs = filter (\x -> x>n) xs
 
 -- Ejercicio 12
-obtenerB :: [(Int, String)] -> String
-obtenerB [] = []
-obtenerB [(_, b)] = b
-obtenerB ((_,b):_) = b  
 
 encuentra' :: Int -> [(Int,String)] -> String
-encuentra' n xs = obtenerB (filter (\(a,_) -> n==a) xs)
+encuentra' n xs = case (filter (\(a,_) -> a==n) xs) of 
+			[] -> ""
+			(x:_) -> snd x
 
 -- Ejercicio 13
+
 primIgualesA :: Eq a => a -> [a] -> [a]
 primIgualesA _ [] = []
 primIgualesA n (x:xs) | x==n = x:primIgualesA n xs
@@ -155,6 +162,7 @@ primIgualesA' :: Eq a => a -> [a] -> [a]
 primIgualesA' n xs = takeWhile (\x -> x==n) xs 
 
 -- Ejercicio 14
+
 primIguales :: Eq a => [a] -> [a]
 primIguales [] = []
 primIguales (x:[]) = [x]
@@ -165,11 +173,12 @@ primIguales' :: Eq a => [a] -> [a]
 primIguales' xs = primIgualesA (head xs) xs
 
 -- Ejercicio 15
+
 minimo :: Ord a => [a] -> a
 minimo (x:[]) = x
 minimo (x:xs) = min x (minimo xs)
 
 minimo' :: Ord a => Bounded a => [a] -> a
-minimo' [] = error "Lista vacia" --Cual podria ser un minimo?? 
+minimo' [] = maxBound
 minimo' (x:[]) = x
 minimo' (x:xs) = min x (minimo xs)
