@@ -13,7 +13,7 @@ factorial :: Int -> Int
 factorial 0 = 1
 factorial x = x * factorial (x-1)
 
-promedio :: [Int] -> Int -- Funcion redondea siempre abajo
+promedio :: [Int] -> Int 
 promedio [] = 0
 promedio (x:xs) = (x + sum xs) `div` (1 + length xs)
 
@@ -148,8 +148,8 @@ mayoresA' n xs = filter (\x -> x>n) xs
 
 encuentra' :: Int -> [(Int,String)] -> String
 encuentra' n xs = case (filter (\(a,_) -> a==n) xs) of 
-			[] -> ""
-			(x:_) -> snd x
+                        [] -> ""
+                        (x:_) -> snd x
 
 -- Ejercicio 13
 
@@ -182,3 +182,50 @@ minimo' :: Ord a => Bounded a => [a] -> a
 minimo' [] = maxBound
 minimo' (x:[]) = x
 minimo' (x:xs) = min x (minimo xs)
+
+-- Ejercicios Estrella
+
+--1
+
+-- a) Esta bien tipado y cubre todos los casos de definición. (a,b) es una tupla y tanto a como b pueden tomar cualquier tipo. x es una tupla (a y b pueden ser de cualquier tipo).
+-- b) Esta bien tipado pero no cumple con todos los casos, en particular el caso vacío. En este caso x debe tener el mismo tipo que a, e y el mismo tipo que b (a y b pueden ser de cualquier tipo).
+-- c) No esta bien tipado. (a,b) es una tupla, no una lista de tuplas.
+-- d) Esta bien tipado pero el caso vacío no esta definido ya que (x:xs) necesita obtener al menos un elemento. x es una tupla donde el primer componente es del mismo tipo que a y el segundo componente es del mismo tipo que b (a y b pueden ser de cualquier tipo).
+-- e) Esta bien tipado pero no esta definido para todos los casos ya que necesita obtener al menos dos elementos que deben ser tuplas.
+-- f) Esta bien tipado pero no cumple con todos los casos ya que la lista tiene que tener una sola tupla donde el primer elemento es 0. No cumple para la lista vacia o cuando tiene mas de una tupla. a puede tomar cualquier tipo.
+-- g) Esta bien tipado pero no cumple para la lista vacía o cuando el segundo elemento de la tupla no es de tipo Num==1. x es de tipo Int.
+-- h) Esta bien tipado pero no cumple para la lista vacía o cuando el primer elemento de la tupla es distinto de 1. x es del mismo tipo de a donde a puede ser de cualquier tipo.
+-- i) Esta bien tipado y cumple con todos los casos. a es una funcion que toma un Int y devuelde otro Int y b es un Int.
+-- j) Esta bien tipado pero no cumple con los casos donde el segundo elemento es distinto de 3. a es una funcion que toma un Int y devuelde otro Int.
+-- k) No esta bien tipado porque esta tomando tres argumentos en vez de una funcion que toma un argumento y devuelve otro y otro argumento.
+-- l) Esta bien tipado y cumple todos los casos. a es de cualquier tipo y g es una funcion que toma a y devuelve a.
+
+-- 2
+
+-- fst -- a) 
+-- snd --b)
+-- swap --c)
+-- head, length --d)
+-- ($!) y ($) (operador de aplicacion, sirve para sacar parentesis) --e)
+-- map --f)
+-- g) NO ESTA
+-- (.) (composicion de funciones)-- h)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
