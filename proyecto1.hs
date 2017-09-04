@@ -205,11 +205,11 @@ minimo' (x:xs) = min x (minimo xs)
 
 -- a) f x = fst x
 -- b) f x = snd x 
--- c) ?????
+-- c) f  (a,b) = typeOf a --no nos cierra
 -- d) f x = typeOf x 
 -- e) f x y = ($!) x y , f' x y = ($) x (operador de aplicacion, sirve para sacar parentesis) 
 -- f) f x y = map x y
--- g) ???????
+-- g) f x y = typeOf (x (y)) --no nos cierra
 -- h) f x y z = (.) x y z (composicion de funciones)
 
 
