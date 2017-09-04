@@ -182,7 +182,7 @@ minimo (x:xs) = min x (minimo xs)
 minimo' :: Ord a => Bounded a => [a] -> a
 minimo' [] = maxBound
 minimo' (x:[]) = x
-minimo' (x:xs) = min x (minimo xs)
+minimo' (x:xs) = min x (minimo' xs)
 
 -- Ejercicios Estrella
 
@@ -210,7 +210,7 @@ minimo' (x:xs) = min x (minimo xs)
 -- d) f x = typeOf x 
 -- e) f x y = ($!) x y , f' x y = ($) x y  
 -- f) f x y = map x y
--- g) f x y = typeOf (x (y)) --no nos cierra
+-- g) f x y = typeOf (x (y))
 -- h) f x y z = (.) x y z 
 
 
