@@ -175,7 +175,7 @@ primIguales' xs = primIgualesA (head xs) xs
 -- Ejercicio 15
 
 minimo :: Ord a => [a] -> a
---minimo [] = error "no habia que definir caso vacio pero da una warning"
+minimo [] = undefined
 minimo (x:[]) = x
 minimo (x:xs) = min x (minimo xs)
 
@@ -205,12 +205,13 @@ minimo' (x:xs) = min x (minimo xs)
 
 -- a) f x = fst x
 -- b) f x = snd x 
--- c) f  (a,b) = typeOf a --no nos cierra
+-- c) f (a,b) = typeOf (snd x)
+--    f' (a,b) = typeOf (fst x)  
 -- d) f x = typeOf x 
--- e) f x y = ($!) x y , f' x y = ($) x (operador de aplicacion, sirve para sacar parentesis) 
+-- e) f x y = ($!) x y , f' x y = ($) x y  
 -- f) f x y = map x y
 -- g) f x y = typeOf (x (y)) --no nos cierra
--- h) f x y z = (.) x y z (composicion de funciones)
+-- h) f x y z = (.) x y z 
 
 
 
