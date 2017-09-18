@@ -131,9 +131,43 @@ busca' (_:xs) cargo = busca' xs cargo
 
 ------                  EJERCICIO 5                  ------
 
-data ListaAsoc a b = Vacia' | Nodo a b (ListaAsoc a b)
+data ListaAsoc a b = Vacio | Nodo a b (ListaAsoc a b)
 type Diccionario = ListaAsoc String String
 type Padron = ListaAsoc Int String
+
+--5a)
+type ApellidoNombre = String
+type Telefono = String
+type GuiaTelefonica = ListaAsoc ApellidoNombre Telefono
+
+--5b)
+la_long :: Integral c => ListaAsoc a b -> c
+la_long (Vacio) = 0
+la_long (Nodo _ _ xs) = 1 + la_long xs
+
+la_concat :: ListaAsoc a b -> ListaAsoc a b -> ListaAsoc a b
+la_concat xs (Vacio) = xs
+la_concat (Vacio) xs = xs
+la_concat (Nodo a b xs) ys = Nodo a b (la_concat xs ys)
+
+la_pares :: ListaAsoc a b -> [(a,b)]
+la_pares (Vacio) = []
+la_pares (Nodo a b xs) = (a,b) : la_pares xs
+
+la_busca :: Eq a => ListaAsoc a b -> a -> Maybe b
+la_busca (Vacio) _ = Nothing
+la_busca (Nodo a b xs) x | x==a = Just b
+                         | otherwise = la_busca xs x
+
+--5c) El ejercicio 4, Encuentra :: Int -> [(Int,String)] -> String, se puede hacer mediante listas de asociaciones
+
+encuentra :: Int -> ListaAsoc Int String -> String
+encuentra x xs = case la_busca xs x of
+                       Nothing -> ""
+                       Just b -> b
+
+
+
 
 
 
