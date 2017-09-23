@@ -65,7 +65,7 @@ estudia _ _ = False
 --3a)
 data Persona = Per String String Int Int Int Int Rol deriving (Show,Eq)
 
---3b) Si se puede
+--3b) Si se puede porque Per es un costructor (y es unico), si fuera un tipo no porque seria recursivo
 
 --3c-1)
 edad :: Persona -> (Int, Int, Int) -> Int
@@ -114,7 +114,7 @@ busca (Encolada (Per _ _ _ _ _ _ _) x) q = busca x q
 
 --4b)
 
--- Ver a que tipo se parece
+-- Es como el tipo lista de Persona
 
 atender' :: [Persona] -> [Persona]
 atender' [] = []
@@ -163,15 +163,68 @@ la_busca (Nodo a b xs) x | x==a = Just b
 
 encuentra :: Int -> ListaAsoc Int String -> String
 encuentra x xs = case la_busca xs x of
-                       Nothing -> ""
-                       Just b -> b
+                      Nothing -> ""
+                      Just b -> b
 
+------                  EJERCICIO 6 (*)                 ------
 
+data Arbol a = Hoja | Rama (Arbol a) a (Arbol a) deriving Show
+type Prefijos = Arbol String
 
+can, cana, canario, canas, cant, cantar, canto :: Prefijos
+can = Rama cana "can" cant
+cana = Rama canario "a" canas
+canario = Rama Hoja "rio" Hoja
+canas = Rama Hoja "s" Hoja
+cant = Rama cantar "t" canto
+cantar = Rama Hoja "ar" Hoja
+canto = Rama Hoja "o" Hoja
 
+--6a)
+a_long :: Integral b => Arbol a -> b
+a_long Hoja = 0
+a_long (Rama left _ right) = 1 + a_long left + a_long right 
 
+--6b)
+a_hojas :: Integral b => Arbol a -> b
+a_hojas Hoja = 1 
+a_hojas (Rama left _ right) = a_hojas left + a_hojas right
 
+--6c)
+a_inc :: Num a => Arbol a -> Arbol a
+a_inc Hoja = Hoja
+a_inc (Rama left x right) = (Rama left (x+1) right)
 
+--6d)
+a_nombre :: Arbol Persona -> Arbol String
+a_nombre Hoja = Hoja
+a_nombre (Rama left (Per a b _ _ _ _ _) right) = Rama (a_nombre left) (a++b) (a_nombre right)
+
+--test=Rama (Rama Hoja (Per "a" "b" 1 2 3 4 Decanx) Hoja) (Per "c" "d" 5 6 7 8 Decanx) (Rama Hoja (Per "e" "f" 1 2 3 4 Decanx) Hoja)
+
+--6e)
+a_map :: (a -> b) -> Arbol a -> Arbol b
+a_map _ Hoja = Hoja
+a_map f (Rama left x right) = Rama (a_map f left) (f x) (a_map f right)
+
+a_inc' :: Num a => Arbol a -> Arbol a
+a_inc' arbol = a_map (+1) arbol
+
+nombrePer :: Persona -> String
+nombrePer (Per a b _ _ _ _ _) = a ++ b
+
+a_nombre' :: Arbol Persona -> Arbol String
+a_nombre' arbol = a_map (nombrePer) arbol 
+
+--6f)
+a_sum :: Num a => Arbol a -> a
+a_sum Hoja = 0
+a_sum (Rama left x right) = x + (a_sum left) + (a_sum right) 
+
+--6g) 
+a_prod :: Num a => Arbol a -> a
+a_prod Hoja = 1
+a_prod (Rama left x right) = x * (a_sum left) * (a_sum right)
 
 
 
