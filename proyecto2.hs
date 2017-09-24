@@ -193,7 +193,7 @@ a_hojas (Rama left _ right) = a_hojas left + a_hojas right
 --6c)
 a_inc :: Num a => Arbol a -> Arbol a
 a_inc Hoja = Hoja
-a_inc (Rama left x right) = (Rama left (x+1) right)
+a_inc (Rama left x right) = (Rama (a_inc left) (x+1) (a_inc right))
 
 --6d)
 a_nombre :: Arbol Persona -> Arbol String
