@@ -49,7 +49,7 @@ doc_cargo cargo (Docente cargoDoc) | cargoDoc==cargo = True
                                    | otherwise = False
 doc_cargo _ (_) = False
 
-cuantos_doc' :: [Rol] -> Cargo -> Int --HAY QUE CAMBIARLO Y HACER APLICACION PARCIAL EN LUGAR DE USAR UNA FUNCION ADENTRO DEL FILTER
+cuantos_doc' :: [Rol] -> Cargo -> Int 
 cuantos_doc' xs cargo = length (filter ((doc_cargo cargo)) xs)
 
 --2e) data Genero = Hombre | Mujer
@@ -57,7 +57,7 @@ cuantos_doc' xs cargo = length (filter ((doc_cargo cargo)) xs)
 
 --2f)
 estudia :: Rol -> Carrera -> Bool 
-estudia (Estudiante carreras _) carrera = elem carrera carreras --Como matcheamos una lista de carreras?
+estudia (Estudiante carreras _) carrera = elem carrera carreras 
 estudia _ _ = False
 
 ------                  EJERCICIO 3                  ------
@@ -108,7 +108,7 @@ encolar p c = Encolada p c
 --4a-3)
 busca :: Cola -> Cargo -> Persona
 busca (Vacia) _ = error "No hay personas en la cola con ese cargo"
-busca (Encolada (Per f e d c1 b a (Docente c)) x) q | c==q = (Per f e d c1 b a (Docente c)) --HAY QUE HACER UNA FUNCION P QUE TOMA UNA PERSONA Y DEVUELVE TRUE SI TIENE EL CARGO Q
+busca (Encolada (Per f e d c1 b a (Docente c)) x) q | c==q = (Per f e d c1 b a (Docente c)) 
                                                     | otherwise = busca x q
 busca (Encolada (Per _ _ _ _ _ _ _) x) q = busca x q 
 
