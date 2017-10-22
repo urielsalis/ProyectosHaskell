@@ -65,18 +65,3 @@ evalStep (If ((x,y):xs)) s = case (evalBExpr x s) of
 evalStep (Do x y) s = case (evalBExpr x s) of
                            False -> (s,Finish)
                            True -> (s, ToExec (Seq y (Do x y)))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
