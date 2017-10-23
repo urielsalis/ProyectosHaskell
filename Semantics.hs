@@ -60,8 +60,8 @@ evalStep (Seq x y) s = case (evalStep x s) of
 			    (s1, Finish) -> (s1, ToExec y)
 			    (s2, ToExec z) -> (s2, ToExec (Seq z y))			 
 evalStep (If ((x,y):xs)) s = case (evalBExpr x s) of
-                                True -> evalStep y s
-                                False -> evalStep (If xs) s
+                                True -> (s, toExec y)
+                                False -> (s, toExec (If xs) s)
 evalStep (Do x y) s = case (evalBExpr x s) of
                            False -> (s,Finish)
                            True -> (s, ToExec (Seq y (Do x y)))
