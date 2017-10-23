@@ -58,10 +58,11 @@ evalStep (AssignB (Var x BoolT) y) (si,sb) = ((si,(la_agregar x (evalBExpr y (si
 evalStep (AssignI (Var x IntT) y) (si,sb) = (((la_agregar x (evalIExpr y si) si),sb), Finish)
 evalStep (Seq x y) s = case (evalStep x s) of
 			    (s1, Finish) -> (s1, ToExec y)
-			    (s2, ToExec z) -> (s2, ToExec (Seq z y))			 
+			    (s2, ToExec z) -> (s2, ToExec (Seq z y))
+evalStep (If []) s = error "Al menos debe existir una guarda verdadera"			 
 evalStep (If ((x,y):xs)) s = case (evalBExpr x s) of
-                                True -> (s, toExec y)
-                                False -> (s, toExec (If xs) s)
+                                True -> (s, ToExec y)
+                                False -> (s, ToExec (If xs))
 evalStep (Do x y) s = case (evalBExpr x s) of
                            False -> (s,Finish)
                            True -> (s, ToExec (Seq y (Do x y)))
